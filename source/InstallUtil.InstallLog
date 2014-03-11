@@ -271,3 +271,34 @@ Die Datei befindet sich in C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLog
 Die Rollbackphase wurde erfolgreich abgeschlossen.
 
 Die transaktive Installation ist abgeschlossen.
+
+
+Die Deinstallation wurde gestartet.
+Die Protokolldatei enthält den Fortschritt der Assembly C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.exe.
+Die Datei befindet sich in C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.InstallLog.
+
+Die Deinstallation ist abgeschlossen.
+
+Eine transaktive Installation wird ausgeführt.
+
+Die Installationsphase wird gestartet.
+Die Protokolldatei enthält den Fortschritt der Assembly C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.exe.
+Die Datei befindet sich in C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.InstallLog.
+
+Während der Installationsphase ist eine Ausnahme aufgetreten.
+System.Security.SecurityException: Die Quelle wurde nicht gefunden, aber einige oder alle Ereignisprotokolle konnten nicht durchsucht werden. Protokolle, auf die kein Zugriff möglich war: Security.
+
+Die Rollbackphase der Installation wird gestartet.
+Die Protokolldatei enthält den Fortschritt der Assembly C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.exe.
+Die Datei befindet sich in C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.InstallLog.
+
+Die Rollbackphase wurde erfolgreich abgeschlossen.
+
+Die transaktive Installation ist abgeschlossen.
+
+
+Die Deinstallation wurde gestartet.
+Die Protokolldatei enthält den Fortschritt der Assembly C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.exe.
+Die Datei befindet sich in C:\Users\vmadmin\Source\Repos\keylogger\source\KeyLogger\bin\Debug\KeyLogger.InstallLog.
+
+Die Deinstallation ist abgeschlossen.
